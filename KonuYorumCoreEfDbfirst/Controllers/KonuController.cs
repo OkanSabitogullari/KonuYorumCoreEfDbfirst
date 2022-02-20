@@ -33,6 +33,16 @@ namespace KonuYorumCoreEfDbfirst.Controllers
                 ViewBag.Mesaj = "Başlık boş girilemez!";
                 return View(konu);
             }
+            if (konu.Baslik.Length > 100)
+            {
+                ViewBag.Mesaj = "Başlık en fazla 100 karakter olmalıdır !";
+                return View(konu);
+            }
+            if (string.IsNullOrWhiteSpace(konu.Aciklama) && konu.Aciklama.Length > 200)
+            {
+                ViewBag.Mesaj = "Açıklama en fazla 200 karakter olmalıdır !";
+                return View(konu);
+            }
             _db.Konu.Add(konu);
             _db.SaveChanges();
             return RedirectToAction("Index");
@@ -63,6 +73,16 @@ namespace KonuYorumCoreEfDbfirst.Controllers
             if (string.IsNullOrWhiteSpace(konu.Baslik))
             {
                 ViewBag.Mesaj = "Başlık boş girilemez!";
+                return View(konu);
+            }
+            if (konu.Baslik.Length > 100)
+            {
+                ViewBag.Mesaj = "Başlık en fazla 100 karakter olmalıdır !";
+                return View(konu);
+            }
+            if (string.IsNullOrWhiteSpace(konu.Aciklama) && konu.Aciklama.Length > 200)
+            {
+                ViewBag.Mesaj = "Açıklama en fazla 200 karakter olmalıdır !";
                 return View(konu);
             }
             _db.Konu.Update(konu);
